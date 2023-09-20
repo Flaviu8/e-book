@@ -39,7 +39,12 @@ CORS_ALLOWED_ORIGINS = [
 
 
 CORS_ALLOW_CREDENTIALS = True
-# Application definition
+
+# Allow cross-site access to cookies
+SESSION_COOKIE_SAMESITE = None
+
+# Add this setting to prevent CSRF issues when using cookies with JWT
+CSRF_COOKIE_SAMESITE = None
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -48,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',  
     'rest_framework_simplejwt',
@@ -104,6 +110,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
+    'JWT_AUTH_COOKIE': 'jwt-auth-cookie',
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=600),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
     'SLIDING_TOKEN_LIFETIME': timedelta(days=1),
